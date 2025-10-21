@@ -11,11 +11,30 @@
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((posts) => {
-        let html = "<ul>";
-        posts.forEach((post) => {
-          html += `<li><strong>${post.title}</strong><br>${post.body}</li>`;
+        let html = `
+          <table class="posts-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Body</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+        posts.forEach(post => {
+          html += `
+            <tr>
+              <td>${post.id}</td>
+              <td>${post.title}</td>
+              <td>${post.body}</td>
+            </tr>
+          `;
         });
-        html += "</ul>";
+        html += `
+            </tbody>
+          </table>
+        `;
         answer.innerHTML = html;
       })
       .catch((error) => {
