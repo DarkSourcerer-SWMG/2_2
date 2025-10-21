@@ -6,7 +6,8 @@
   const answer = document.getElementById('answer')
 
   example.addEventListener("click", function () {
-    answer.innerHTML = 'Loading...';
+    const loadingPopup = document.getElementById('loading-popup');
+    loadingPopup.style.display = 'flex';
     setTimeout(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
@@ -36,10 +37,15 @@
           </table>
         `;
         answer.innerHTML = html;
+
+        loadingPopup.style.display = 'none';
       })
+      
       .catch((error) => {
         answer.innerHTML = "Błąd podczas pobierania danych.";
         console.error(error);
+
+        loadingPopup.style.display = 'none';
       });
       }, 1500);
   });
